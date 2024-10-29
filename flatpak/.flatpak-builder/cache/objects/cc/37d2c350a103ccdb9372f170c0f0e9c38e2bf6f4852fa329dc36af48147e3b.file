@@ -1,0 +1,10 @@
+asarPy-1.0.1.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+asarPy-1.0.1.dist-info/METADATA,sha256=s5RmA09MxOAMEKV5Yw734Ise-hoc0G3S4BEVnPp2QSs,229
+asarPy-1.0.1.dist-info/RECORD,,
+asarPy-1.0.1.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+asarPy-1.0.1.dist-info/WHEEL,sha256=GJ7t_kWBFywbagK5eo9IoUwLW6oyOeTKmQ-9iHFVNxQ,92
+asarPy-1.0.1.dist-info/top_level.txt,sha256=joH8xHf6JA0EpuUi0gh1rzM2r8zk75qvvkCDJEhQK9k,7
+asarPy/__init__.py,sha256=Df-dy7inh2wm0xKVVTuoL4SpbSlMu32U2bNgsKxt3ZA,21
+asarPy/__pycache__/__init__.cpython-311.pyc,,
+asarPy/__pycache__/asar.cpython-311.pyc,,
+asarPy/asar.py,sha256=5XwtJND0NzWiBbZfd-Gu-9fIh0gPyrJMyhXJoDwqFbc,5416

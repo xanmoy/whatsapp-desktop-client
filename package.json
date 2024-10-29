@@ -1,0 +1,32 @@
+{
+  "name": "whatsapp-desktop-client",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --linux snap"
+  },
+  "build": {
+    "appId": "com.example.whatsappdesktopclient",
+    "linux": {
+      "target": "snap",
+      "icon": "assets/icon.png",
+      "category": "Utility"
+    }
+  },
+  "repository": "https://github.com/xanmoy/whatsapp-desktop-clientwhatsapp-desktop-client.git",
+  "keywords": [
+    "Electron",
+    "WhatsApp",
+    "whatsappdesktop",
+    "Linux",
+    "desktopApplication"
+  ],
+  "author": "Tanmoy Ganguly",
+  "license": "ISC",
+  "description": "A simple and efficient desktop client for WhatsApp.",
+  "devDependencies": {
+    "electron": "^33.0.2",
+    "electron-builder": "^25.1.8"
+  }
+}
