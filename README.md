@@ -23,6 +23,23 @@ WhatsApp Desktop is a cross-platform desktop application that allows you to use 
 sudo snap install whatsapp-desktop-client
 ```
 
+Or,
+
+
+1. **Download the Tar File**: If you haven't already, make sure you have the Tar file whatsapp-desktop-client_1.0.0_amd64.tar in your current directory.
+2. **Run the Extraction Command**:
+
+```bash
+tar -xzvf whatsapp-desktop-client_1.0.0_amd64.tar
+```
+
+3. **Run the Installation Script**: Open a terminal and navigate to the directory where the whatsapp-desktop-client_1.0.0_amd64 is located. Then, execute the installation script:
+
+```bash
+sudo sh ./install.sh
+```
+
+
 ### Build From Source
 1. **Clone the repository**:
 

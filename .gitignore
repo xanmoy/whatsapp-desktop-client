@@ -3,6 +3,7 @@ node_modules/
 
 # Build output
 dist/
+build/
 whatsapp-desktop.AppDir/
 
 # Log files
