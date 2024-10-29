@@ -2,7 +2,7 @@
 
 WhatsApp Desktop is a cross-platform desktop application that allows you to use WhatsApp directly on your computer, making it easier to chat with friends and family while working.
 
-![Image](https://github.com/xanmoy/whatsapp-desktop/blob/main/screenshots/image2.png)
+![Image](https://github.com/xanmoy/whatsapp-desktop-client/blob/main/screenshots/image2.png)
 
 
 ## Features
@@ -12,14 +12,8 @@ WhatsApp Desktop is a cross-platform desktop application that allows you to use 
 - **Media sharing**: Easily share images, videos, and documents.
 - **Notifications**: Get desktop notifications for new messages.
 
-![Image](https://github.com/xanmoy/whatsapp-desktop/blob/main/screenshots/image3.png)
+![Image](https://github.com/xanmoy/whatsapp-desktop-client/blob/main/screenshots/image3.png)
 
-## Clone the repository:
-
-```bash
-git clone https://github.com/xanmoy/whatsapp-desktop.git
-cd whatsapp-desktop
-```
 
 ## Installation
 
@@ -30,29 +24,35 @@ sudo snap install whatsapp-desktop-client
 ```
 
 ### Build From Source
+1. **Clone the repository**:
 
-1. **Install dependencies**: Ensure that you have all the necessary dependencies installed.
+```bash
+git clone https://github.com/xanmoy/whatsapp-desktop-client.git
+cd whatsapp-desktop-client
+```
+
+2. **Install dependencies**: Ensure that you have all the necessary dependencies installed.
 ```bash
    npm instal
 ```
-2. Start the application:
+3. Start the application:
 
 ```bash
 npm start
 ```
 
-3. **Build the application**: Run the following command to create a Snap package of the application.
+4. **Build the application**: Run the following command to create a Snap package of the application.
 
 ```bash
 npm run dist
 ```
-4. **Change to the dist directory**: Navigate to the dist directory where the Snap package is located.
+5. **Change to the dist directory**: Navigate to the dist directory where the Snap package is located.
 
 ```bash
 cd dist
 ```
 
-5. **Install the Snap package**: Use the following command to install the Snap package. The `--dangerous` flag allows the installation of locally built packages.
+6. **Install the Snap package**: Use the following command to install the Snap package. The `--dangerous` flag allows the installation of locally built packages.
 
 ```bash
 sudo snap install --dangerous ./whatsapp-desktop-client_1.0.0_amd64.snap 
@@ -61,7 +61,7 @@ sudo snap install --dangerous ./whatsapp-desktop-client_1.0.0_amd64.snap
 ## Uninstallation Steps
 Remove the Snap package: To uninstall the WhatsApp Desktop application, run the following command:
 ```bash
-sudo snap remove whatsapp-desktop
+sudo snap remove whatsapp-desktop-client
 ```
 
 ## Usage
