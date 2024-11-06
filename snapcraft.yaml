@@ -1,0 +1,33 @@
+name: whatsapp-desktop-client
+base: core20
+version: '1.0.0'
+summary: Unofficial WhatsApp Desktop Client
+description: |
+  A simple and efficient desktop client for WhatsApp, using Electron to provide a seamless experience.
+
+grade: stable
+confinement: strict
+
+apps:
+  whatsapp-desktop-client:
+    command: whatsapp-desktop-client
+    extensions: [gnome-3-38]
+    plugs:
+      - network
+      - network-bind
+      - desktop
+      - desktop-legacy
+      - wayland
+      - x11
+      - opengl
+
+parts:
+  whatsapp-desktop-client:
+    plugin: dump
+    source: .
+    stage-packages:
+      - libnss3
+      - libxss1
+      - libgtk-3-0
+    after:
+      - desktop-gtk3

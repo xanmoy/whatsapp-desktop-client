@@ -1,9 +1,0 @@
-Metadata-Version: 2.1
-Name: asarPy
-Version: 1.0.1
-Summary: Library for working with .asar files
-Home-page: https://github.com/AS1337/asarPy.git
-Author: AS1337
-Author-email: as1337@gmail.com
-Keywords: asar,electron,asarPy,pyasar
-
