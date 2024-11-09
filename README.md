@@ -2,7 +2,7 @@
 
 WhatsApp Desktop is a cross-platform desktop application that allows you to use WhatsApp directly on your computer, making it easier to chat with friends and family while working.
 
-![Image](https://github.com/xanmoy/whatsapp-desktop-client/blob/main/screenshots/image1.png)
+![Image](https://raw.githubusercontent.com/xanmoy/whatsapp-desktop-client/refs/heads/main/screenshots/banner.jpeg)
 
 ## Features
 
@@ -11,7 +11,7 @@ WhatsApp Desktop is a cross-platform desktop application that allows you to use 
 - **Media sharing**: Easily share images, videos, and documents.
 - **Notifications**: Get desktop notifications for new messages.
 
-![Image](https://github.com/xanmoy/whatsapp-desktop-client/blob/main/screenshots/image4.png)
+![Image](https://github.com/xanmoy/whatsapp-desktop-client/blob/main/screenshots/image1.png)
 
 ## Installation
 
