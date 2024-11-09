@@ -12,52 +12,90 @@ This project is created for educational purposes only.
 copyright @ Tanmoy Ganguly
 */
 
-const { app, BrowserWindow, session } = require('electron');
-const path = require('path');
+import { app, BrowserWindow, shell } from 'electron';
+import path from 'path';
+import { config } from './config/index.js';
 
-function createWindow() {
-    // Create a new session that persists across app launches
-    const userSession = session.fromPartition('persist:whatsapp');
-
-    const win = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: false, // Set to false for security
-            contextIsolation: true, // Enable context isolation for better security
-            sandbox: true, // Enable sandboxing
-            preload: path.join(__dirname, 'preload.js'), // Load the preload script
-            session: userSession // Use the persistent session here
-        },
-        icon: path.resolve(__dirname, 'assets', 'icon.png')
+// Dynamically import the context menu module
+import('electron-context-menu').then((contextMenu) => {
+    contextMenu.default({
+        showSaveImageAs: true
     });
+});
 
-    // Set a modern user agent
-    win.webContents.userAgent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36';
+const appUrl = 'https://web.whatsapp.com';
 
-    // Load WhatsApp Web
-    win.loadURL('https://web.whatsapp.com/').catch(err => {
-        console.error("Failed to load WhatsApp Web:", err);
-    });
+/**
+ * @type {BrowserWindow}
+ */
+let window = null;
 
-    // Handle the close event to minimize the window instead
-    win.on('close', (event) => {
-        event.preventDefault(); // Prevent the window from closing
-        win.hide(); // Hide the window instead
-    });
+/**
+ * @param {Electron.HandlerDetails} details 
+ * @returns {action: 'deny'}
+ */
+function onNewWindow(details) {
+    shell.openExternal(details.url);
+    return { action: 'deny' };
 }
 
-// Event handlers for app lifecycle
-app.whenReady().then(createWindow);
+const createWindow = () => {
+    // Calculate __dirname for ES modules
+    const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
+    window = new BrowserWindow({
+        icon: path.join(__dirname, 'assets/icon.png'),
+        autoHideMenuBar: true
+    });
+    window.loadURL(appUrl, { userAgent: config.userAgent });
 
-app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow();
+    window.webContents.setWindowOpenHandler(onNewWindow);
+
+    window.once('ready-to-show', () => {
+        window.maximize();
+    });
+};
+
+const appLock = app.requestSingleInstanceLock();
+
+const protocolClient = 'whatsapp';
+if (!app.isDefaultProtocolClient(protocolClient, process.execPath)) {
+    app.setAsDefaultProtocolClient(protocolClient, process.execPath);
+}
+
+if (!appLock) {
+    app.quit();
+} else {
+    app.on('second-instance', onAppSecondInstance);
+    app.on('ready', onAppReady);
+}
+
+async function onAppReady() {
+    createWindow();
+}
+
+function processArgs(args) {
+    const regHttps = /^https:\/\/web\.whatsapp\.com\/.*/g;
+    const regWapp = /^whatsapp:\/.*/g;
+    for (const arg of args) {
+        if (regHttps.test(arg)) {
+            return arg;
+        }
+        if (regWapp.test(arg)) {
+            return appUrl + arg.substring(10);  // Corrected substring usage
+        }
     }
-});
+}
+
+function onAppSecondInstance(event, args) {
+    console.debug('second-instance started');
+    if (window) {
+        event.preventDefault();
+        const url = processArgs(args);
+        if (url) {
+            window.loadURL(url, { userAgent: config.chromeUserAgent });
+        }
+
+        window.focus();
+    }
+}
