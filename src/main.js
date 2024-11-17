@@ -15,6 +15,7 @@ copyright @ Tanmoy Ganguly
 import { app, BrowserWindow, shell } from 'electron';
 import path from 'path';
 import { config } from './config/index.js';
+import { fileURLToPath } from 'url';  // <-- Import `fileURLToPath` from 'url'
 
 // Dynamically import the context menu module
 import('electron-context-menu').then((contextMenu) => {
@@ -39,10 +40,10 @@ function onNewWindow(details) {
     return { action: 'deny' };
 }
 
-const createWindow = () => {
-    // Calculate __dirname for ES modules
-    const __dirname = path.dirname(new URL(import.meta.url).pathname);
+// Calculate __dirname for ES modules
+const __dirname = path.dirname(fileURLToPath(import.meta.url));  // <-- Updated: Calculate `__dirname` directly
 
+const createWindow = () => {
     window = new BrowserWindow({
         icon: path.join(__dirname, 'assets/icon.png'),
         autoHideMenuBar: true
