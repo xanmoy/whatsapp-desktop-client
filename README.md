@@ -4,7 +4,7 @@ WhatsApp Desktop is a cross-platform desktop application that allows you to use 
 
 ![Image](https://raw.githubusercontent.com/xanmoy/whatsapp-desktop-client/refs/heads/main/screenshots/banner.jpeg)
 
-## Features
+## 🛠 **Features**
 
 - **Multi-platform**: Runs on Linux, Windows, and macOS.
 - **Real-time messaging**: Stay connected with your contacts through instant messaging.
@@ -13,27 +13,10 @@ WhatsApp Desktop is a cross-platform desktop application that allows you to use 
 
 ![Image](https://github.com/xanmoy/whatsapp-desktop-client/blob/main/screenshots/image1.png)
 
-## Installation
-
-### Simple Installation
+## 📦 **Installation**
 
 ```bash
 sudo snap install whatsapp-desktop-client
-```
-
-Or,
-
-1. **Download the Tar File**: If you haven't already, make sure you have the Tar file whatsapp-desktop-client_1.0.0_amd64.tar in your current directory.
-2. **Run the Extraction Command**:
-
-```bash
-tar -xzvf whatsapp-desktop-client_1.0.0_amd64.tar
-```
-
-3. **Run the Installation Script**: Open a terminal and navigate to the directory where the whatsapp-desktop-client_1.0.0_amd64 is located. Then, execute the installation script:
-
-```bash
-sudo sh ./install.sh
 ```
 
 ### Build From Source
@@ -72,37 +55,36 @@ cd dist
 6. **Install the Snap package**: Use the following command to install the Snap package. The `--dangerous` flag allows the installation of locally built packages.
 
 ```bash
-sudo snap install --dangerous ./whatsapp-desktop-client_1.0.3_amd64.snap 
+sudo snap install --dangerous ./whatsapp-desktop-client_*.snap
 ```
 
-## Uninstallation Steps
+## ↩️ **Uninstallation Steps**
 
-Remove the Snap package: To uninstall the WhatsApp Desktop application, run the following command:
+Remove the Snap package: To uninstall the Notion Desktop application, run the following command:
 
 ```bash
 sudo snap remove whatsapp-desktop-client
 ```
 
-## Usage
+## 📖 **Usage Instructions**
 
-Once installed, launch the application and log in with your WhatsApp account by scanning the QR code displayed on the screen with your phone.
+### **Launching the App**:
 
-## Contributing
+   After installation, open Notion Desktop using:
+
+```bash
+   whatsapp-desktop-client
+```
+
+## 🤝 **Contributing**
 
 Contributions are welcome! If you'd like to contribute to this project, please fork the repository and submit a pull request.
 
-### Fork the project.
-
-Create your feature branch (git checkout -b feature/YourFeature).
-Commit your changes (git commit -m 'Add some feature').
-Push to the branch (git push origin feature/YourFeature).
-Open a pull request.
-
-## License
+## 📜 **License**
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ## Acknowledgments
 
-Electron - Framework used to build the application.
-WhatsApp - Messaging platform.
+- **Electron** - Framework used to build the application.
+- **Notion** - A new tool that blends your everyday work apps into one. It's the all-in-one workspace for you and your team.
