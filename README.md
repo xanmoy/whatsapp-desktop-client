@@ -4,6 +4,8 @@ WhatsApp Desktop is a cross-platform desktop application that allows you to use 
 
 ![Image](https://raw.githubusercontent.com/xanmoy/whatsapp-desktop-client/refs/heads/main/screenshots/banner.jpeg)
 
+[![Get it from the Snap Store](https://snapcraft.io/en/dark/install.svg)](https://snapcraft.io/whatsapp-desktop-client)
+
 ## 🛠 **Features**
 
 - **Multi-platform**: Runs on Linux, Windows, and macOS.
