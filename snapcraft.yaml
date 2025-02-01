@@ -1,6 +1,6 @@
 name: whatsapp-desktop-client
 base: core20
-version: '1.0.0'
+version: '1.2.0'  # Update version
 summary: Unofficial WhatsApp Desktop Client
 description: |
   A simple and efficient desktop client for WhatsApp, using Electron to provide a seamless experience.
@@ -11,7 +11,7 @@ confinement: strict
 apps:
   whatsapp-desktop-client:
     command: whatsapp-desktop-client
-    extensions: [gnome-3-38]
+    extensions: [gnome-3-38]  # Keep GNOME 3.38 extension
     plugs:
       - network
       - network-bind
@@ -29,5 +29,6 @@ parts:
       - libnss3
       - libxss1
       - libgtk-3-0
-    after:
-      - desktop-gtk3
+      - libglib2.0-bin  # Ensure GTK apps work properly
+      - libgdk-pixbuf2.0-0  # Fix missing icons issue
+      - libdrm2  # Required for graphics
