@@ -27,9 +27,21 @@ const stateFilePath = path.join(app.getPath('userData'), 'window-state.json');
  */
 function loadWindowState() {
     try {
-        const state = JSON.parse(fs.readFileSync(stateFilePath, 'utf-8'));
+        // Check if the state file exists before reading
+        if (!fs.existsSync(stateFilePath)) {
+            console.log("Window state file not found, using default settings.");
+            return getCenteredWindowState(800, 600);
+        }
 
-        // Get all displays and find the saved display by ID
+        const rawData = fs.readFileSync(stateFilePath, 'utf-8');
+        const state = JSON.parse(rawData);
+
+        // Validate the parsed state
+        if (!state.width || !state.height || isNaN(state.x) || isNaN(state.y)) {
+            throw new Error("Invalid window state data");
+        }
+
+        // Get all available displays
         const displays = screen.getAllDisplays();
         const display = displays.find(d => d.id === state.displayId);
 
@@ -38,7 +50,7 @@ function loadWindowState() {
             return getCenteredWindowState(state.width, state.height);
         }
 
-        // Ensure the window is within the bounds of the selected display
+        // Ensure the window is within the display bounds
         if (
             state.x < display.bounds.x || state.y < display.bounds.y ||
             state.x + state.width > display.bounds.x + display.bounds.width ||
@@ -50,24 +62,37 @@ function loadWindowState() {
 
         return state;
     } catch (error) {
-        return getCenteredWindowState(800, 600); // Default size
+        console.error("Error loading window state:", error);
+        return getCenteredWindowState(800, 600); // Fallback to default state
     }
 }
+
 
 /**
  * Saves window state including display information before closing.
  */
 function saveWindowState(win) {
-    if (!win.isMinimized()) {
-        console.log("Save window state");
-        const bounds = win.getBounds();
-        const display = screen.getDisplayMatching(bounds); // Get the display where the window is currently located
-        fs.writeFileSync(stateFilePath, JSON.stringify({
-            ...bounds,
-            displayId: display.id // Store the display ID instead of bounds
-        }));
+    // Check if the window is minimized or fullscreen
+    if (!win.isMinimized() && !win.isFullScreen()) {
+        console.log("Saving window state...");
+
+        try {
+            const bounds = win.getBounds();
+            const display = screen.getDisplayMatching(bounds); // Get the display where the window is currently located
+
+            // Save the state with window bounds and displayId
+            fs.writeFileSync(stateFilePath, JSON.stringify({
+                ...bounds,
+                displayId: display.id  // Store the display ID instead of bounds
+            }));
+
+            console.log(`Window state saved: ${JSON.stringify(bounds)}`);
+        } catch (error) {
+            console.error("Error saving window state:", error);
+        }
     }
 }
+
 
 /**
  * Calculates a centered window state based on the given screen bounds.
