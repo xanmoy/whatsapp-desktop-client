@@ -27,17 +27,11 @@ const stateFilePath = path.join(app.getPath('userData'), 'window-state.json');
  */
 function loadWindowState() {
     try {
-
         const state = JSON.parse(fs.readFileSync(stateFilePath, 'utf-8'));
 
-        // Get all displays and check if the saved display still exists
+        // Get all displays and find the saved display by ID
         const displays = screen.getAllDisplays();
-
-        const display = displays.find(d => 
-            state.displayBounds &&
-            d.bounds.x === state.displayBounds.x &&
-            d.bounds.y === state.displayBounds.y
-        );
+        const display = displays.find(d => d.id === state.displayId);
 
         if (!display) {
             console.log("Previous display not found, using primary display.");
@@ -70,7 +64,7 @@ function saveWindowState(win) {
         const display = screen.getDisplayMatching(bounds); // Get the display where the window is currently located
         fs.writeFileSync(stateFilePath, JSON.stringify({
             ...bounds,
-            displayBounds: display.bounds
+            displayId: display.id // Store the display ID instead of bounds
         }));
     }
 }
@@ -84,7 +78,7 @@ function getCenteredWindowState(width, height, bounds = screen.getPrimaryDisplay
         height,
         x: Math.max(bounds.x, Math.floor(bounds.x + (bounds.width - width) / 2)),
         y: Math.max(bounds.y, Math.floor(bounds.y + (bounds.height - height) / 2)),
-        displayBounds: bounds
+        displayId: screen.getPrimaryDisplay().id // Save the primary display ID by default
     };
 }
 
@@ -117,6 +111,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));  // <-- Updated:
 
 const createWindow = () => {
     const windowState = loadWindowState();
+
     window = new BrowserWindow({
         width: windowState.width,
         height: windowState.height,
@@ -125,11 +120,12 @@ const createWindow = () => {
         icon: path.join(__dirname, 'assets/icon.png'),
         autoHideMenuBar: true
     });
+
     window.loadURL(appUrl, { userAgent: config.userAgent });
 
     window.webContents.setWindowOpenHandler(onNewWindow);
 
-    window.on('close', () => saveWindowState(window));
+    window.on('close', () => saveWindowState(window)); // Save state on close
 };
 
 const appLock = app.requestSingleInstanceLock();
