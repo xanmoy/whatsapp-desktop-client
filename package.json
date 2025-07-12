@@ -1,16 +1,19 @@
 {
   "name": "whatsapp-desktop-client",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "src/main.js",
   "type": "module",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --linux snap"
+    "dist": "electron-builder --linux"
   },
   "build": {
     "appId": "com.example.whatsappdesktopclient",
     "linux": {
-      "target": "snap",
+      "target": [
+        "dir",
+        "snap"
+      ],
       "icon": "assets/icon.png",
       "category": "Utility"
     }

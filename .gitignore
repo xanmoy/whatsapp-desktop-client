@@ -1,26 +1,48 @@
-# Node modules
+# Node.js dependencies
 node_modules/
+package-lock.json
+yarn.lock
 
-# Build output
+# Compiled build outputs
 dist/
 build/
-whatsapp-desktop.AppDir/
+build-dir/
+*.AppDir/
+.snapcraft/
+.snap/
 
-# Log files
+# Flatpak
+.flatpak-builder/
+*.flatpak
+*.flatpakref
+
+# Logs
 *.log
-
-# Environment variables
-.env
-
-# Temporary files
-*.tmp
-*.temp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # OS-specific files
 .DS_Store
 Thumbs.db
 
-# Miscellaneous
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Env files
+.env
+
+# VS Code & JetBrains IDEs
+.vscode/
+.idea/
+
+# Electron builder config cache
+out/
+release/
+
+# Snapcraft build artifacts
+*.snap
+
+# Temp files
+*.tmp
+*.temp
+
+# Test coverage
+coverage/

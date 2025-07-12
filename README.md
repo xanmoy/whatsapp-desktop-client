@@ -1,92 +1,113 @@
-# WhatsApp Desktop
+# WhatsApp Desktop (Unofficial)
 
-WhatsApp Desktop is a cross-platform desktop application that allows you to use WhatsApp directly on your computer, making it easier to chat with friends and family while working.
+WhatsApp Desktop is a cross-platform desktop application built using Electron. It lets you use [WhatsApp Web](https://web.whatsapp.com/) on your desktop in a secure, standalone window with notifications, persistent login, and more.
 
-![Image](https://raw.githubusercontent.com/xanmoy/whatsapp-desktop-client/refs/heads/main/screenshots/banner.jpeg)
+![Banner](https://raw.githubusercontent.com/xanmoy/whatsapp-desktop-client/refs/heads/main/screenshots/banner.jpeg)
 
-[![Get it from the Snap Store](https://snapcraft.io/en/dark/install.svg)](https://snapcraft.io/whatsapp-desktop-client)
+---
 
 ## 🛠 **Features**
 
-- **Multi-platform**: Runs on Linux, Windows, and macOS.
-- **Real-time messaging**: Stay connected with your contacts through instant messaging.
-- **Media sharing**: Easily share images, videos, and documents.
-- **Notifications**: Get desktop notifications for new messages.
+- **Cross-platform**: Linux, Windows, and macOS support.
+- **Media sharing**: Send/receive images, videos, docs.
+- **Notifications**: Native desktop alerts.
+- **Secure**: Electron app sandboxed with Flatpak or Snap.
+- **Wayland + X11 compatible**
 
-![Image](https://github.com/xanmoy/whatsapp-desktop-client/blob/main/screenshots/image1.png)
+![Screenshot](https://github.com/xanmoy/whatsapp-desktop-client/blob/main/screenshots/image1.png)
+
+---
 
 ## 📦 **Installation**
+
+### 🐧 Flatpak
+
+If you're on Fedora, Arch, or other Flatpak-compatible systems:
+
+```bash
+flatpak install flathub com.xanmoy.WhatsAppDesktop
+```
+
+Or run directly (after building locally):
+
+```bash
+flatpak run com.xanmoy.WhatsAppDesktop
+```
+
+> ❗ Note: If you get a sandbox error on some systems, try launching with:
+
+```bash
+flatpak run com.xanmoy.WhatsAppDesktop --no-sandbox
+```
+
+---
+
+### 🐧 Snap (Alternative)
+
+[![Get it from the Snap Store](https://snapcraft.io/en/dark/install.svg)](https://snapcraft.io/whatsapp-desktop-client)
 
 ```bash
 sudo snap install whatsapp-desktop-client
 ```
 
-### Build From Source
+---
 
-1. **Clone the repository**:
+## 🔧 **Build From Source**
 
 ```bash
 git clone https://github.com/xanmoy/whatsapp-desktop-client.git
 cd whatsapp-desktop-client
-```
-
-2. **Install dependencies**: Ensure that you have all the necessary dependencies installed.
-
-```bash
-   npm instal
-```
-
-3. Start the application:
-
-```bash
+npm install
 npm start
 ```
 
-4. **Build the application**: Run the following command to create a Snap package of the application.
+To build Snap package:
 
 ```bash
 npm run dist
-```
-
-5. **Change to the dist directory**: Navigate to the dist directory where the Snap package is located.
-
-```bash
 cd dist
-```
-
-6. **Install the Snap package**: Use the following command to install the Snap package. The `--dangerous` flag allows the installation of locally built packages.
-
-```bash
 sudo snap install --dangerous ./whatsapp-desktop-client_*.snap
 ```
 
-## ↩️ **Uninstallation Steps**
+To build Flatpak locally:
 
-Remove the Snap package: To uninstall the Notion Desktop application, run the following command:
+```bash
+flatpak-builder --user --install --force-clean build-dir flatpak/com.xanmoy.WhatsAppDesktop.yaml
+```
+
+---
+
+## ↩️ **Uninstallation**
+
+### Snap:
 
 ```bash
 sudo snap remove whatsapp-desktop-client
 ```
 
-## 📖 **Usage Instructions**
-
-### **Launching the App**:
-
-   After installation, open Notion Desktop using:
+### Flatpak:
 
 ```bash
-   whatsapp-desktop-client
+flatpak uninstall com.xanmoy.WhatsAppDesktop
 ```
 
-## 🤝 **Contributing**
+---
 
-Contributions are welcome! If you'd like to contribute to this project, please fork the repository and submit a pull request.
+## 🤝 Contributing
 
-## 📜 **License**
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+---
+
+## 📜 License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
-## Acknowledgments
+> This is an unofficial client. All trademarks and logos belong to Meta (WhatsApp Inc). This project is not affiliated with or endorsed by Meta.
 
-- **Electron** - Framework used to build the application.
-- **Notion** - A new tool that blends your everyday work apps into one. It's the all-in-one workspace for you and your team.
+---
+
+## 🙌 Acknowledgments
+
+- **Electron** — for powering the cross-platform app shell.
+- **WhatsApp Web** — used via secure browser engine.

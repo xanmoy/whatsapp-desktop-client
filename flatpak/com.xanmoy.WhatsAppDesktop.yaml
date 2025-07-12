@@ -1,0 +1,35 @@
+app-id: com.xanmoy.WhatsAppDesktop
+version: '1.2.1'
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: launch.sh
+finish-args:
+  - --share=network
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --filesystem=home
+  - --persist=whatsapp-desktop
+
+modules:
+  - name: whatsapp-desktop
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/whatsapp
+      - cp -r ./* /app/whatsapp/
+      - rm -f /app/whatsapp/chrome-sandbox
+      - mkdir -p /app/bin
+      - install -m 755 launch.sh /app/bin/launch.sh
+      - install -D icon.png /app/share/icons/hicolor/512x512/apps/com.xanmoy.WhatsAppDesktop.png
+      - install -D whatsapp-desktop.desktop /app/share/applications/com.xanmoy.WhatsAppDesktop.desktop
+
+    sources:
+      - type: dir
+        path: ../dist/linux-unpacked
+      - type: file
+        path: icon.png
+      - type: file
+        path: whatsapp-desktop.desktop
+      - type: file
+        path: launch.sh

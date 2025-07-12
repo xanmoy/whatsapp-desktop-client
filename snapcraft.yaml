@@ -1,6 +1,6 @@
 name: whatsapp-desktop-client
 base: core20
-version: '1.2.0'  # Update version
+version: '1.2.1'  # Update version
 summary: Unofficial WhatsApp Desktop Client
 description: |
   A simple and efficient desktop client for WhatsApp, using Electron to provide a seamless experience.
