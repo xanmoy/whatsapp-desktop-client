@@ -21,6 +21,32 @@ import { fileURLToPath } from 'url';  // <-- Import `fileURLToPath` from 'url'
 // Define path for storing window state
 const stateFilePath = path.join(app.getPath('userData'), 'window-state.json');
 
+/**
+ * Detects whether the session is running under Wayland.
+ * Wayland does not provide global window coordinates and often
+ * exposes only a single virtual display. This affects window restore logic.
+ */
+function isWayland() {
+    return process.env.XDG_SESSION_TYPE === 'wayland' ||
+           process.env.WAYLAND_DISPLAY ||
+           process.env.XDG_CURRENT_DESKTOP?.toLowerCase().includes("wayland");
+}
+
+/**
+ * Returns all displays in a reliable way.
+ *
+ * On X11: Returns all physical displays correctly
+ * On Wayland: Many compositors return only one virtual display. To avoid broken restore behavior, this function forces the use of the primary display only, ensuring safe restore behavior
+ */
+function safeGetDisplays() {
+    const displays = screen.getAllDisplays();
+
+    if (isWayland()) {
+        return [screen.getPrimaryDisplay()];
+    }
+
+    return displays;
+}
 
 /**
  * Loads saved window state and ensures it is within available screen bounds.
@@ -42,11 +68,19 @@ function loadWindowState() {
         }
 
         // Get all available displays
-        const displays = screen.getAllDisplays();
+        const displays = safeGetDisplays();
         const display = displays.find(d => d.id === state.displayId);
 
         if (!display) {
             console.log("Previous display not found, using primary display.");
+
+            if (isWayland()) {
+                // Wayland fallback: always center on primary display
+                const primary = screen.getPrimaryDisplay();
+                return getCenteredWindowState(state.width, state.height, primary.bounds);
+            }
+
+            // X11 fallback: original behavior
             return getCenteredWindowState(state.width, state.height);
         }
 
@@ -77,7 +111,7 @@ function saveWindowState(win) {
         console.log("Saving window state...");
 
         try {
-            const bounds = win.getBounds();
+            const bounds = isWayland() ? win.getBounds() : win.getNormalBounds();
             const display = screen.getDisplayMatching(bounds); // Get the display where the window is currently located
 
             // Save the state with window bounds and displayId

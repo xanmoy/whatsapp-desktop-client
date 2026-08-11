@@ -27,10 +27,10 @@
   "license": "ISC",
   "description": "A simple and efficient desktop client for WhatsApp.",
   "devDependencies": {
-    "electron": "^33.2.0",
-    "electron-builder": "^25.1.8"
+    "electron": "^39.2.5",
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
-    "electron-context-menu": "^4.0.4"
+    "electron-context-menu": "^4.1.1"
   }
 }
